@@ -28,7 +28,7 @@ jobs:
         with:
           inlineScript: |
             pushd ./scripts/runbooks
-            New-AzAutomationRunbook -AutomationAccountName "tryingCT" -Name myrunbookPython -ResourceGroupName "test" -Type Python3
+            New-AzAutomationRunbook -AutomationAccountName 'tryingCT' -Name myrunbookPython -ResourceGroupName "test" -Type Python3
             Publish-AzAutomationRunbook -Name myrunbookPython -AutomationAccountName 'tryingCT'  -ResourceGroupName 'tets'
             popd
           azPSVersion: "latest"
