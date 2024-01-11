@@ -27,7 +27,7 @@ jobs:
         uses: azure/powershell@v1
         with:
           inlineScript: |
-            pushd ../scripts/runbooks
+            pushd ./scripts/runbooks
             Import-AzAutomationRunbook -Path "myrunbook.py"  -Name myrunbookPython -Type Python -AutomationAccountName 'tryingCT' -ResourceGroupName 'tets' -Force
             Publish-AzAutomationRunbook -Name myrunbook -AutomationAccountName 'tryingCT'  -ResourceGroupName 'tets'
             popd
