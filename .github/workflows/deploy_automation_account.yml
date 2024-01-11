@@ -21,7 +21,7 @@ jobs:
           # client-id: ${{ secrets.ARM_CLIENT_ID }}
           # tenant-id: ${{ secrets.ARM_TENANT_ID }}
           # subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-          # enable-AzPSSession: true
+          enable-AzPSSession: true
       # Deploy runbooks
       - name: Deploy Azure runbooks
         uses: azure/powershell@v1
