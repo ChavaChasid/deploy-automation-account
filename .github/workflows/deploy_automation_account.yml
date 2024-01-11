@@ -1,0 +1,37 @@
+# This workflow deploys Azure automation runbooks into Azure.
+name: Deploy Kontext automation runbooks
+on:
+  # push:
+  #   branches: ["master"]
+    # paths:
+    #   - "scripts/automation/**"
+  workflow_dispatch:
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      # Login to Azure
+      - uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.ARM_CLIENT_ID }}
+          tenant-id: ${{ secrets.ARM_TENANT_ID }}
+          subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          enable-AzPSSession: true
+      # Deploy runbooks
+      - name: Deploy Azure runbooks
+        uses: azure/powershell@v1
+        with:
+          inlineScript: |
+            pushd ../scripts/runbooks
+            Import-AzAutomationRunbook -Path "myrunbook.py"  -Name myrunbookPython -Type Python -AutomationAccountName 'tryingCT' -ResourceGroupName 'tets' -Force
+            Publish-AzAutomationRunbook -Name myrunbook -AutomationAccountName 'tryingCT'  -ResourceGroupName 'tets'
+            popd
+          azPSVersion: "latest"
+      # Logout
+      - name: logout
+        run: |
+          az logout
