@@ -17,10 +17,11 @@ jobs:
       # Login to Azure
       - uses: azure/login@v1
         with:
-          client-id: ${{ secrets.ARM_CLIENT_ID }}
-          tenant-id: ${{ secrets.ARM_TENANT_ID }}
-          subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-          enable-AzPSSession: true
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          # client-id: ${{ secrets.ARM_CLIENT_ID }}
+          # tenant-id: ${{ secrets.ARM_TENANT_ID }}
+          # subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          # enable-AzPSSession: true
       # Deploy runbooks
       - name: Deploy Azure runbooks
         uses: azure/powershell@v1
