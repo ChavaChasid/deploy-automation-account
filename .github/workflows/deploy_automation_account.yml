@@ -29,7 +29,7 @@ jobs:
 
           inlineScript: |
             Import-AzAutomationDscConfiguration -Published
-            -ResourceGroupName tets -SourcePath $HOME/myrunbook.py
+            -ResourceGroupName tets -SourcePath $HOME/scripts/runbooks/myrunbook.py
             -Force `
             -AutomationAccountName tryingCT
           # inlineScript: |
