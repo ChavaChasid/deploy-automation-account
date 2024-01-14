@@ -26,11 +26,20 @@ jobs:
       - name: Deploy Azure runbooks
         uses: azure/powershell@v1
         with:
+
           inlineScript: |
-            pushd ./scripts/runbooks
-            ./myrunbook.py -resourceGroupName "tets" -automationAccountName "tryingCT"
-            popd
-          azPSVersion: "latest"
+            Import-AzAutomationDscConfiguration -Published
+            -ResourceGroupName tets -SourcePath $HOME/myrunbook.py
+            -Force `
+            -AutomationAccountName tryingCT
+          # inlineScript: |
+          #   pushd ./scripts/runbooks
+          #   ./myrunbook.py -resourceGroupName "tets" -automationAccountName "tryingCT"
+          #   popd
+          # azPSVersion: "latest"
+
+
+
           # inlineScript: |
           #   pushd ./scripts/runbooks
           #   Import-AzAutomationRunbook -Path "myrunbook.py"  -Name myrunbookPython -Type Python3 -AutomationAccountName 'Deploy' -ResourceGroupName 'tets' -Force
