@@ -27,10 +27,12 @@ jobs:
         uses: azure/powershell@v1
         with:
           inlineScript: |
-            pushd ./scripts/runbooks
-            Import-AzAutomationRunbook -Path "myrunbook.py"  -Name myrunbookPython -Type Python3 -AutomationAccountName 'tryingCT' -ResourceGroupName 'tets' -Force
-            Publish-AzAutomationRunbook -Name myrunbookPython -AutomationAccountName 'tryingCT'  -ResourceGroupName 'tets'
-            popd
+            Select-AzSubscription
+          # inlineScript: |
+          #   pushd ./scripts/runbooks
+          #   Import-AzAutomationRunbook -Path "myrunbook.py"  -Name myrunbookPython -Type Python3 -AutomationAccountName 'tryingCT' -ResourceGroupName 'tets' -Force
+          #   Publish-AzAutomationRunbook -Name myrunbookPython -AutomationAccountName 'tryingCT'  -ResourceGroupName 'tets'
+          #   popd
           azPSVersion: "latest"
       # Logout
       - name: logout
