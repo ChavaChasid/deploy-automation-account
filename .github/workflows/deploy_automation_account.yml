@@ -27,7 +27,7 @@ jobs:
         uses: azure/powershell@v1
         with:
           inlineScript: |
-            Select-AzSubscription -SubscriptionName Moon- azure camp
+            Select-AzSubscription -SubscriptionName "Moon- azure camp"
           # inlineScript: |
           #   pushd ./scripts/runbooks
           #   Import-AzAutomationRunbook -Path "myrunbook.py"  -Name myrunbookPython -Type Python3 -AutomationAccountName 'tryingCT' -ResourceGroupName 'tets' -Force
