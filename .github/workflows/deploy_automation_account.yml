@@ -28,7 +28,7 @@ jobs:
         with:
           inlineScript: |
             pushd ./scripts/runbooks
-            ./deploy-automation-runbooks.ps1 -resourceGroupName "tets" -automationAccountName "tryingCT"
+            ./deploy-automation-runbooks.py -resourceGroupName "tets" -automationAccountName "tryingCT"
             popd
           azPSVersion: "latest"
           # inlineScript: |
