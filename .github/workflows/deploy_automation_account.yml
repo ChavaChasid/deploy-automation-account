@@ -27,9 +27,9 @@ jobs:
         uses: azure/powershell@v1
         with:
 
-          inlineScript: |
-            Import-AzAutomationDscConfiguration -Published -ResourceGroupName tets -SourcePath ./scripts/runbooks/myrunbook.py -Force
-            -AutomationAccountName tryingCT
+          # inlineScript: |
+          #   Import-AzAutomationDscConfiguration -Published -ResourceGroupName tets -SourcePath ./scripts/runbooks/myrunbook.py -Force
+          #   -AutomationAccountName tryingCT
           # inlineScript: |
           #   pushd ./scripts/runbooks
           #   ./myrunbook.py -resourceGroupName "tets" -automationAccountName "tryingCT"
@@ -38,12 +38,12 @@ jobs:
 
 
 
-          # inlineScript: |
-          #   pushd ./scripts/runbooks
-          #   Import-AzAutomationRunbook -Path "myrunbook.py"  -Name myrunbookPython -Type Python3 -AutomationAccountName 'Deploy' -ResourceGroupName 'tets' -Force
-          #   Publish-AzAutomationRunbook -Name myrunbookPython -AutomationAccountName 'Deploy'  -ResourceGroupName 'tets'
-          # #   popd
-          # azPSVersion: "latest"
+          inlineScript: |
+            pushd ./scripts/runbooks
+            Import-AzAutomationRunbook -Path "myrunbook.py"  -Name myrunbookPython -Type Python3 -AutomationAccountName 'Deploy' -ResourceGroupName 'cloud-shell-storage-westeurope' -Force
+            Publish-AzAutomationRunbook -Name myrunbookPython -AutomationAccountName 'Deploy'  -ResourceGroupName 'cloud-shell-storage-westeurope'
+          #   popd
+          azPSVersion: "latest"
       # Logout
       - name: logout
         run: |
