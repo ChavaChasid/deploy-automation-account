@@ -18,42 +18,19 @@ jobs:
       - uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-          # client-id: ${{ secrets.ARM_CLIENT_ID }}
-          # tenant-id: ${{ secrets.ARM_TENANT_ID }}
-          # subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
           enable-AzPSSession: true
       # Deploy runbooks
       - name: Deploy Azure runbooks
         uses: azure/powershell@v1
         with:
 
-        inlineScript: |
+          inlineScript: |
             pushd ./scripts/runbooks
             Import-AzAutomationRunbook -Path "myrunbook.ps1"  -Name myrunbook -Type Python3 -AutomationAccountName 'tryingCT' -ResourceGroupName 'cloud-shell-storage-westeurope' -Force
-             Publish-AzAutomationRunbook -Name myrunbook -AutomationAccountName 'tryingCT'  -ResourceGroupName 'cloud-shell-storage-westeurope'
+            Publish-AzAutomationRunbook -Name myrunbook -AutomationAccountName 'tryingCT'  -ResourceGroupName 'cloud-shell-storage-westeurope'
             popd
           azPSVersion: "latest"
-
-          # inlineScript: |
-          #   Import-AzAutomationDscConfiguration -Published -ResourceGroupName tets -SourcePath ./scripts/runbooks/myrunbook.py -Force
-          #   -AutomationAccountName tryingCT
-          # inlineScript: |
-          #   pushd ./scripts/runbooks
-          #   ./myrunbook.py -resourceGroupName "tets" -automationAccountName "tryingCT"
-          #   popd
-          # azPSVersion: "latest"
-
-
-
-          # inlineScript: |
-          #   pushd ./scripts/runbooks
-          #   Import-AzAutomationRunbook -Path "myrunbook.py"  -Name myrunbookPython -Type Python3 -AutomationAccountName 'Deploy' -ResourceGroupName 'cloud-shell-storage-westeurope' -Force
-          #   Publish-AzAutomationRunbook -Name myrunbookPython -AutomationAccountName 'Deploy'  -ResourceGroupName 'cloud-shell-storage-westeurope'
-          #   popd
-          # azPSVersion: "latest"
       # Logout
       - name: logout
         run: |
           az logout
-  # New-AzAutomationRunbook -AutomationAccountName 'tryingCT' -Name myrunbookPython -ResourceGroupName "test" -Type Python3
-  # Select-AzSubscription -SubscriptionName "Moon- azure camp"
