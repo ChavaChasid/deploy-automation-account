@@ -28,12 +28,12 @@ jobs:
         with:
           inlineScript: |
             pushd ./scripts/runbooks
-            New-AzAutomationRunbook -AutomationAccountName 'auto-wow-account' -Name myrunbookPython -ResourceGroupName "test" -Type Python3
-            Publish-AzAutomationRunbook -Name myrunbookPython -AutomationAccountName 'auto-wow-account'  -ResourceGroupName 'tets'
+            Import-AzAutomationRunbook -Path "myrunbook.py"  -Name myrunbookPython -Type Python3 -AutomationAccountName 'tryingCT' -ResourceGroupName 'tets' -Force
+            Publish-AzAutomationRunbook -Name myrunbookPython -AutomationAccountName 'tryingCT'  -ResourceGroupName 'tets'
             popd
           azPSVersion: "latest"
       # Logout
       - name: logout
         run: |
           az logout
-# Import-AzAutomationRunbook -Path "myrunbook.py"  -Name myrunbookPython -Type Python3 -AutomationAccountName 'tryingCT' -ResourceGroupName 'tets' -Force
+  # New-AzAutomationRunbook -AutomationAccountName 'tryingCT' -Name myrunbookPython -ResourceGroupName "test" -Type Python3
