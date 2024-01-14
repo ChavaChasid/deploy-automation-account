@@ -26,16 +26,20 @@ jobs:
       - name: Deploy Azure runbooks
         uses: azure/powershell@v1
         with:
-          # inlineScript: |
           inlineScript: |
             pushd ./scripts/runbooks
-            Select-AzSubscription -SubscriptionName "Moon- azure camp"
-            Import-AzAutomationRunbook -Path "myrunbook.py"  -Name myrunbookPython -Type Python3 -AutomationAccountName 'Deploy' -ResourceGroupName 'tets' -Force
-            Publish-AzAutomationRunbook -Name myrunbookPython -AutomationAccountName 'Deploy'  -ResourceGroupName 'tets'
-          #   popd
+            ./deploy-automation-runbooks.ps1 -resourceGroupName "tets" -automationAccountName "tryingCT"
+            popd
           azPSVersion: "latest"
+          # inlineScript: |
+          #   pushd ./scripts/runbooks
+          #   Import-AzAutomationRunbook -Path "myrunbook.py"  -Name myrunbookPython -Type Python3 -AutomationAccountName 'Deploy' -ResourceGroupName 'tets' -Force
+          #   Publish-AzAutomationRunbook -Name myrunbookPython -AutomationAccountName 'Deploy'  -ResourceGroupName 'tets'
+          # #   popd
+          # azPSVersion: "latest"
       # Logout
       - name: logout
         run: |
           az logout
   # New-AzAutomationRunbook -AutomationAccountName 'tryingCT' -Name myrunbookPython -ResourceGroupName "test" -Type Python3
+  # Select-AzSubscription -SubscriptionName "Moon- azure camp"
