@@ -15,13 +15,14 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
           enable-AzPSSession: true
-      # Deploy runbooks
-      - name: Deploy Azure runbooks
+      
+
+      # link runbook to schedule
+      - name: Link Runbook To Schedule
         uses: azure/powershell@v1
         with:
           inlineScript: |
-            pushd ./scripts
-            Import-AzAutomationRunbook -AutomationAccountName 'tryingCT' -Name 'createRemediationTaskRunbook' -Path remediation_task_runbook.ps1 -Published -ResourceGroupName 'cloud-shell-storage-westeurope' -Type PowerShell
+            New-AzureAutomationSchedule –AutomationAccountName 'tryingCT' –Name 'githubaction' –StartTime "5/03/2024 14:37:00" –DayInterval 1
             popd
           azPSVersion: "latest"
 
