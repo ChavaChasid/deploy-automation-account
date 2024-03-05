@@ -22,6 +22,7 @@ jobs:
           inlineScript: |
             pushd ./scripts
             Import-AzAutomationRunbook -AutomationAccountName 'tryingCT' -Name 'createRemediationTaskRunbook' -Path remediation_task_runbook.ps1 -Published -ResourceGroupName 'cloud-shell-storage-westeurope' -Type PowerShell
+            popd
           azPSVersion: "latest"
 
 
