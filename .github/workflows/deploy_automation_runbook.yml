@@ -1,10 +1,6 @@
 # This workflow deploys Azure automation runbooks into Azure.
-name: Deploy Kontext automation runbooks
+name: Deploy automation runbooks
 on:
-  # push:
-  #   branches: ["master"]
-    # paths:
-    #   - "scripts/automation/**"
   workflow_dispatch:
 permissions:
   contents: read
@@ -24,8 +20,8 @@ jobs:
         uses: azure/powershell@v1
         with:
           inlineScript: |
-            pushd ./scripts/runbooks
-            Import-AzAutomationRunbook -AutomationAccountName 'tryingCT' -Name 'deploypolicyrunbook' -Path myrunbook.ps1 -Published -ResourceGroupName 'cloud-shell-storage-westeurope' -Type PowerShell
+            pushd ./scripts
+            Import-AzAutomationRunbook -AutomationAccountName 'tryingCT' -Name 'remediation_task_runbook' -Path remediation_task_runbook.ps1 -Published -ResourceGroupName 'cloud-shell-storage-westeurope' -Type PowerShell
             popd
           azPSVersion: "latest"
       # Logout
