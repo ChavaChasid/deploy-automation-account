@@ -27,13 +27,16 @@ jobs:
           azPSVersion: "latest"    
 
       # Create And link runbook to schedule
-      - name: Link Runbook To Schedule
+      - name: Create And Link Runbook To Schedule
         uses: azure/powershell@v1
         with:
           inlineScript: |
             $TimeZone = ([System.TimeZoneInfo]::Local).Id
-            New-AzAutomationSchedule -AutomationAccountName "tryingCT" -Name "githubaction" -StartTime "5/03/2024 15:05:00" -DayInterval 1 -TimeZone $TimeZone -ResourceGroupName "cloud-shell-storage-westeurope"
-            Register-AzAutomationScheduledRunbook -AutomationAccountName "tryingCT" -RunbookName "createRemediationTaskRunbook" -ScheduleName "githubaction" -ResourceGroupName "cloud-shell-storage-westeurope"
+            $ResourceGroupName = "cloud-shell-storage-westeurope"
+            $ScheduleName = "scheduleToPolicyRunbook"
+            $AutomationAccountName = "tryingCT"
+            New-AzAutomationSchedule -AutomationAccountName $AutomationAccountName -Name $ScheduleName -StartTime "6/03/2024 07:00:00" -DayInterval 1 -TimeZone $TimeZone -ResourceGroupName $ResourceGroupName
+            Register-AzAutomationScheduledRunbook -AutomationAccountName $AutomationAccountName -RunbookName "createRemediationTaskRunbook" -ScheduleName $ScheduleName -ResourceGroupName $ResourceGroupName
           azPSVersion: "latest"
 
 
