@@ -23,7 +23,6 @@ jobs:
         with:
           inlineScript: |
             New-AzureAutomationSchedule –AutomationAccountName 'tryingCT' –Name 'githubaction' –StartTime "5/03/2024 14:37:00" –DayInterval 1
-            popd
           azPSVersion: "latest"
 
 
