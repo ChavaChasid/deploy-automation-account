@@ -24,6 +24,7 @@ jobs:
           inlineScript: |
             $TimeZone = ([System.TimeZoneInfo]::Local).Id
             New-AzAutomationSchedule -AutomationAccountName "tryingCT" -Name "githubaction" -StartTime "5/03/2024 15:05:00" -DayInterval 1 -TimeZone $TimeZone -ResourceGroupName "cloud-shell-storage-westeurope"
+            Register-AzAutomationScheduledRunbook -AutomationAccountName "tryingCT" -RunbookName "createRemediationTaskRunbook" -ScheduleName "githubaction" -ResourceGroupName "cloud-shell-storage-westeurope"
           azPSVersion: "latest"
 
 
