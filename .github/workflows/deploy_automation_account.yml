@@ -24,9 +24,7 @@ jobs:
         uses: azure/powershell@v1
         with:
           inlineScript: |
-            pushd ./scripts/runbooks
-            Import-AzAutomationRunbook -Path "myrunbook.ps1"  -Name deploypolicyrunbook -Type PowerShell -AutomationAccountName 'tryingCT' -ResourceGroupName 'cloud-shell-storage-westeurope' -Force
-            Publish-AzAutomationRunbook -Name deploypolicyrunbook -AutomationAccountName 'tryingCT'  -ResourceGroupName 'cloud-shell-storage-westeurope'
+            Import-AzAutomationRunbook -AutomationAccountName 'tryingCT' -Name 'deploypolicyrunbook' -Path ./scripts/runbooks/myrunbook.ps1 -Published -ResourceGroupName 'cloud-shell-storage-westeurope' -Type PowerShell
             popd
           azPSVersion: "latest"
       # Logout
