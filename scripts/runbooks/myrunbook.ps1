@@ -1,1 +1,1 @@
-print("before")
+Write-Output "before."
