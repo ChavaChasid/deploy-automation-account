@@ -22,7 +22,7 @@ jobs:
         uses: azure/powershell@v1
         with:
           inlineScript: |
-            New-AzAutomationSchedule -AutomationAccountName "tryingCT" -Name "githubaction" -StartTime "5/03/2024 15:05:00" -DayInterval 1 -TimeZone 'Israel - Israel Time' -ResourceGroupName "cloud-shell-storage-westeurope"
+            New-AzAutomationSchedule -AutomationAccountName "tryingCT" -Name "githubaction" -StartTime "5/03/2024 15:05:00" -DayInterval 1 -TimeZone 'Europe/Paris' -ResourceGroupName "cloud-shell-storage-westeurope"
           azPSVersion: "latest"
 
 
