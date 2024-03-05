@@ -27,7 +27,7 @@ jobs:
           inlineScript: |
             pushd ./scripts/runbooks
             Import-AzAutomationRunbook -Path "myrunbook.py"  -Name myrunbook -Type Python3 -AutomationAccountName 'tryingCT' -ResourceGroupName 'cloud-shell-storage-westeurope' -Force
-            Publish-AzAutomationRunbook -Name deploypolicytorunbook -AutomationAccountName 'tryingCT'  -ResourceGroupName 'cloud-shell-storage-westeurope'
+            Publish-AzAutomationRunbook -Name myrunbook -AutomationAccountName 'tryingCT'  -ResourceGroupName 'cloud-shell-storage-westeurope'
             popd
           azPSVersion: "latest"
       # Logout
