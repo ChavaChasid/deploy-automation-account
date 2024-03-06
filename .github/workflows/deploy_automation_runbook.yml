@@ -17,6 +17,7 @@ jobs:
           enable-AzPSSession: true
 
       
+
       # Create And link runbook to schedule
       - name: Create And Link Runbook To Schedule
         uses: azure/powershell@v1
@@ -26,7 +27,7 @@ jobs:
             $ResourceGroupName = "cloud-shell-storage-westeurope"
             $ScheduleName = "scheduleToPolicyRunbook"
             $AutomationAccountName = "tryingCT"
-            New-AzAutomationSchedule -AutomationAccountName $AutomationAccountName -Name $ScheduleName -StartTime "6/03/2024 10:05:00" -HourInterval 1 -TimeZone $TimeZone -ResourceGroupName $ResourceGroupName
+            New-AzAutomationSchedule -AutomationAccountName $AutomationAccountName -Name $ScheduleName -StartTime "03/06/2024 10:07:00" -HourInterval 1 -TimeZone $TimeZone -ResourceGroupName $ResourceGroupName
             Register-AzAutomationScheduledRunbook -AutomationAccountName $AutomationAccountName -RunbookName "createRemediationTaskRunbook" -ScheduleName $ScheduleName -ResourceGroupName $ResourceGroupName
           azPSVersion: "latest"
 
