@@ -27,7 +27,7 @@ jobs:
             $ResourceGroupName = "cloud-shell-storage-westeurope"
             $ScheduleName = "scheduleToPolicyRunbook"
             $AutomationAccountName = "tryingCT"
-            New-AzAutomationSchedule -AutomationAccountName $AutomationAccountName -Name $ScheduleName -StartTime "06/03/2024 07:00:00" -DayInterval 1 -TimeZone $TimeZone -ResourceGroupName $ResourceGroupName
+            New-AzAutomationSchedule -AutomationAccountName $AutomationAccountName -Name $ScheduleName -StartTime "6/03/2024 10:00:00" -DayInterval 1 -TimeZone $TimeZone -ResourceGroupName $ResourceGroupName
             Register-AzAutomationScheduledRunbook -AutomationAccountName $AutomationAccountName -RunbookName "createRemediationTaskRunbook" -ScheduleName $ScheduleName -ResourceGroupName $ResourceGroupName
           azPSVersion: "latest"
 
