@@ -16,14 +16,14 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
           enable-AzPSSession: true
 
-      
+
 
       # Create And link runbook to schedule
       - name: Create And Link Runbook To Schedule
         uses: azure/powershell@v1
         with:
           inlineScript: |
-            $TimeZone = 'Europe/Paris'
+            $TimeZone = 'Asia/Jerusalem'
             $ResourceGroupName = "cloud-shell-storage-westeurope"
             $ScheduleName = "scheduleToPolicyRunbook"
             $AutomationAccountName = "tryingCT"
