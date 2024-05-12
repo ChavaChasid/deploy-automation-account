@@ -21,8 +21,11 @@ jobs:
         uses: azure/powershell@v1
         with:
           inlineScript: |
+            $params = @{
+              identity = '3e455f37-1e8b-4dd6-bff0-26d3859e7d37'
+            }
             pushd ./scripts
-            Import-AzAutomationRunbook -AutomationAccountName 'tryingCT' -Name 'createRemediationTaskRunbook' -Path remediation_task_runbook.ps1 -Published -ResourceGroupName 'cloud-shell-storage-westeurope' -Type PowerShell
+            Import-AzAutomationRunbook -AutomationAccountName 'automation-account-dev' -Name 'createRemediationTaskRunbook' -Path remediation_task_runbook.ps1 @params -Published -ResourceGroupName 'DefaultResourceGroup-EUS' -Type PowerShell
             popd
           azPSVersion: "latest"    
 
