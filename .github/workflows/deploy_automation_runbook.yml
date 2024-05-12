@@ -25,7 +25,7 @@ jobs:
               identity = "d04087e1-5c66-44a3-9fdb-ff4e62349a17"
             }        
             pushd ./scripts
-            Import-AzAutomationRunbook -AutomationAccountName 'automation-account-dev' -Name 'createRemediationTaskRunbook' -Path remediation_task_runbook.ps1  @params -Published -ResourceGroupName 'DefaultResourceGroup-EUS' -Type PowerShell
+            Import-AzAutomationRunbook -AutomationAccountName 'automation-account-dev' -Name 'createRemediationTaskRunbook' -Path remediation_task_runbook.ps1  -Parameters $params -Published -ResourceGroupName 'DefaultResourceGroup-EUS' -Type PowerShell
             popd
           azPSVersion: "latest"    
 
