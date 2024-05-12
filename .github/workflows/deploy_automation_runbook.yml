@@ -21,11 +21,9 @@ jobs:
         uses: azure/powershell@v1
         with:
           inlineScript: |
-            $params = @{
-              identity = '3e455f37-1e8b-4dd6-bff0-26d3859e7d37'
-            }
+            $identity="d04087e1-5c66-44a3-9fdb-ff4e62349a17"
             pushd ./scripts
-            Import-AzAutomationRunbook -AutomationAccountName 'automation-account-dev' -Name 'createRemediationTaskRunbook' -Path remediation_task_runbook.ps1 @params -Published -ResourceGroupName 'DefaultResourceGroup-EUS' -Type PowerShell
+            Import-AzAutomationRunbook -AutomationAccountName 'automation-account-dev' -Name 'createRemediationTaskRunbook' -Path remediation_task_runbook.ps1 -identity $identity -Published -ResourceGroupName 'DefaultResourceGroup-EUS' -Type PowerShell
             popd
           azPSVersion: "latest"    
 
@@ -35,9 +33,9 @@ jobs:
         with:
           inlineScript: |
             $TimeZone = 'Asia/Jerusalem'
-            $ResourceGroupName = "cloud-shell-storage-westeurope"
+            $ResourceGroupName = "DefaultResourceGroup-EUS"
             $ScheduleName = "scheduleToPolicyRunbook"
-            $AutomationAccountName = "tryingCT"
+            $AutomationAccountName = "automation-account-dev"
             New-AzAutomationSchedule -AutomationAccountName $AutomationAccountName -Name $ScheduleName -StartTime "03/08/2024 10:00:00" -DayInterval 1 -TimeZone $TimeZone -ResourceGroupName $ResourceGroupName
             Register-AzAutomationScheduledRunbook -AutomationAccountName $AutomationAccountName -RunbookName "createRemediationTaskRunbook" -ScheduleName $ScheduleName -ResourceGroupName $ResourceGroupName
           azPSVersion: "latest"

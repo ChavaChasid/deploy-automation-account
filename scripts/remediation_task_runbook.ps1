@@ -1,7 +1,7 @@
 param(
-[Parameter(Mandatory=$true)]
-        [string] 
-        $identity
+    [Parameter(Mandatory=$true)]
+            [string] 
+            $identity
 )
 $subscription = "MOON-NM-DIG-DEV"
 # $identity = "3e455f37-1e8b-4dd6-bff0-26d3859e7d37"
