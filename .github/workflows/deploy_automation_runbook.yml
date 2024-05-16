@@ -27,6 +27,10 @@ jobs:
       #     pip install -r requirements.txt
       #     pip install azure-cli
 
+      - name: Install python packages
+        run: |
+          az login
+
       - name: execute py script # run policy_assignment.py
         run: 
             python policy_assignments.py
