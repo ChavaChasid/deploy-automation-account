@@ -1,14 +1,14 @@
-# Param
-# (
-#   [Parameter (Mandatory= $true)]
-#   [string] $identity,
+Param
+(
+  [Parameter (Mandatory= $true)]
+  [string] $identity,
 
-#   [Parameter (Mandatory= $true)]
-#   [string] $subscription
-# )
+  [Parameter (Mandatory= $true)]
+  [string] $subscription
+)
 
-$subscription = "MOON-NM-DIG-DEV"
-$identity = "af3790d3-869e-4582-b72a-fe020311d392"
+# $subscription = "MOON-NM-DIG-DEV"
+# $identity = "af3790d3-869e-4582-b72a-fe020311d392"
 $AzureContext = (Connect-AzAccount -Identity -AccountId $identity).context
 $connectionResult = Set-AzContext -Subscription $subscription -DefaultProfile $AzureContext
 
