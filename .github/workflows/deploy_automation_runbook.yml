@@ -29,6 +29,8 @@ jobs:
 
       - name: execute py script # run policy_assignment.py
         uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
         run: 
             python policy_assignments.py
         working-directory: scripts
