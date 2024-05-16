@@ -28,7 +28,9 @@ jobs:
       #     pip install azure-cli
 
       - name: execute py script # run policy_assignment.py
-        run: python policy_assignments.py
+        run: 
+            python policy_assignments.py
+        working-directory: scripts
 
 
       # # Deploy runbooks
