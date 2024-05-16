@@ -1,14 +1,18 @@
-param(
-    [Parameter(Mandatory=$true)]
-            [string] 
-            $identity
+Param
+(
+  [Parameter (Mandatory= $true)]
+  [string] $identity,
+
+  [Parameter (Mandatory= $true)]
+  [string] $subscription
 )
-$subscription = "MOON-NM-DIG-DEV"
-# $identity = "3e455f37-1e8b-4dd6-bff0-26d3859e7d37"
+
+# $subscription = "MOON-NM-DIG-DEV"
+# $identity = "af3790d3-869e-4582-b72a-fe020311d392"
 $AzureContext = (Connect-AzAccount -Identity -AccountId $identity).context
 $connectionResult = Set-AzContext -Subscription $subscription -DefaultProfile $AzureContext
 
-$policyAssignmentIdArray="tablepolicybycodenorg","queuepolicybycodenorg","filepolicybycodenorg","blobpolicybycodenorg"
+$policyAssignmentIdArray="queuepolicy","tablepolicy","blobpolicy","filepolicy"
 
 for ($var = 0; $var -le 4; $var++) {
     $policyAssignmentId="/subscriptions/a273b4fb-6a3d-4804-a047-5d293da8811d/providers/microsoft.authorization/policyassignments/"+$policyAssignmentIdArray[$var]
