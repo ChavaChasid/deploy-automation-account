@@ -33,15 +33,15 @@ jobs:
       #   working-directory: scripts
 
 
-      # Deploy runbooks
-      - name: Deploy Azure runbooks
-        uses: azure/powershell@v1
-        with:
-          inlineScript: |       
-            pushd ./scripts
-            Import-AzAutomationRunbook -AutomationAccountName 'moon-dev' -Name 'createRemediationTaskRunbookPolicy' -Path remediation_task_runbook.ps1 -Published -ResourceGroupName 'DefaultResourceGroup-EUS' -Type PowerShell
-            popd
-          azPSVersion: "latest"    
+      # # Deploy runbooks
+      # - name: Deploy Azure runbooks
+      #   uses: azure/powershell@v1
+      #   with:
+      #     inlineScript: |       
+      #       pushd ./scripts
+      #       Import-AzAutomationRunbook -AutomationAccountName 'moon-dev' -Name 'createRemediationTaskRunbookPolicy' -Path remediation_task_runbook.ps1 -Published -ResourceGroupName 'DefaultResourceGroup-EUS' -Type PowerShell
+      #       popd
+      #     azPSVersion: "latest"    
 
       # Create And link runbook to schedule
       - name: Create And Link Runbook To Schedule
@@ -52,7 +52,7 @@ jobs:
             $ResourceGroupName = "DefaultResourceGroup-EUS"
             $ScheduleName = "scheduleToPolicyRunbook"
             $AutomationAccountName = "automation-account-dev"
-            $params =  @{"identity"="af3790d3-869e-4582-b72a-fe020311d392","subscription"="MOON-NM-DIG-DEV"}
+            $params =  @{"identity"="af3790d3-869e-4582-b72a-fe020311d392";"subscription"="MOON-NM-DIG-DEV"}
             New-AzAutomationSchedule -AutomationAccountName $AutomationAccountName -Name $ScheduleName -StartTime "03/08/2024 10:00:00" -DayInterval 1 -TimeZone $TimeZone -ResourceGroupName $ResourceGroupName
             Register-AzAutomationScheduledRunbook -AutomationAccountName $AutomationAccountName -Parameters $params -RunbookName "createRemediationTaskRunbook" -ScheduleName $ScheduleName -ResourceGroupName $ResourceGroupName
           azPSVersion: "latest"
