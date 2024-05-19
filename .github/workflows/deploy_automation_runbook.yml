@@ -22,10 +22,10 @@ jobs:
         with:
           python-version: '3.11' # install the python version needed
 
-      # - name: install python packages
-      #   run: |
-      #     pip install -r requirements.txt
-      #     pip install azure-cli
+      - name: install python packages
+        run: |
+# pip install -r requirements.txt
+          pip install azure-cli
 
       - name: execute py script # run policy_assignment.py
         run: 
