@@ -26,6 +26,7 @@ jobs:
         run: |
           pip install azure-cli
           pip install azure.identity
+          pip install python-dotenv
           
 
       - name: execute py script # run policy_assignment.py
