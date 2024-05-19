@@ -25,6 +25,8 @@ jobs:
       - name: install python packages
         run: |
           pip install azure-cli
+          pip install azure.identity
+          
 
       - name: execute py script # run policy_assignment.py
         run: 
