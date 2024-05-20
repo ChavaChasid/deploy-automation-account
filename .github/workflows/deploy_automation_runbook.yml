@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: login
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS2 }}
-          enable-AzPSSession: true
+      # - name: login
+      #   uses: azure/login@v1
+      #   with:
+      #     creds: ${{ secrets.AZURE_CREDENTIALS2 }}
+      #     enable-AzPSSession: true
 
       # - name: login to azure
       #   uses: azure/powershell@v1
@@ -25,9 +25,9 @@ jobs:
       #       $connectionResult = Set-AzContext -Subscription $subscription -DefaultProfile $AzureContext
       #     azPSVersion: "latest"
 
-      # - name: login
-      #   run: |
-      #     az login --identity --username "policy"
+      - name: login
+        run: |
+          az login --identity --username "af3790d3-869e-4582-b72a-fe020311d392"
 
 
       - name: setup python
