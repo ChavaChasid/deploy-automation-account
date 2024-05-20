@@ -27,7 +27,7 @@ jobs:
 
       - name: login
         run: |
-          az login --af3790d3-869e-4582-b72a-fe020311d392
+          az login --identity "af3790d3-869e-4582-b72a-fe020311d392"
 
 
       - name: setup python
