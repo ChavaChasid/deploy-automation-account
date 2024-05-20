@@ -18,6 +18,7 @@ jobs:
 
       - name: login to azure
         with:
+          uses: azure/powershell@v1
           inlineScript: |
             $identity = "af3790d3-869e-4582-b72a-fe020311d392"
             $AzureContext = (Connect-AzAccount -Identity -AccountId $identity).context
