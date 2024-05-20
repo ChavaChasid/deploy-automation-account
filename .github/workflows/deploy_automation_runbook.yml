@@ -27,7 +27,7 @@ jobs:
 
       - name: login
         run: |
-          az login --identity --username "${{secrets.OBJECT_ID}}"
+          az login --identity --username ${{secrets.OBJECT_ID}}
 
 
       - name: setup python
