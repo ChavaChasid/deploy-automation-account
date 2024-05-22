@@ -4,9 +4,8 @@ from azure.mgmt.resource.policy.models import PolicyAssignment, Identity
 from azure.identity import AzureCliCredential
 
 import os
-from dotenv import load_dotenv, find_dotenv
-
-load_dotenv(find_dotenv())
+from dotenv import load_dotenv
+load_dotenv('../.env')
 
 # BASEDIR = os.path.abspath(os.path.dirname(__file__))
 # load_dotenv(os.path.join(BASEDIR, '.env'))
