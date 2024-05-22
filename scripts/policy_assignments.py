@@ -5,7 +5,7 @@ from azure.identity import AzureCliCredential
 
 import os
 from dotenv import load_dotenv
-load_dotenv(override=True)
+load_dotenv('.env')
 
 # BASEDIR = os.path.abspath(os.path.dirname(__file__))
 # load_dotenv(os.path.join(BASEDIR, '.env'))
