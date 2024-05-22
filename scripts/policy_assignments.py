@@ -35,7 +35,7 @@ for i in range(0,4):
     policy_assignment_details = PolicyAssignment(display_name=assignments_name[i],
                                                policy_definition_id=f"/providers/Microsoft.Authorization/policyDefinitions/{definitions_id[i]}",
                                                 description="Updating log analytics",
-                                                identity=policy_assignment_identity,
+                                                # identity=policy_assignment_identity,
                                                 location=assignment_location,
                                                 parameters=parameters)
 
