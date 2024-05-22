@@ -19,7 +19,7 @@ credential = AzureCliCredential()
 policyClient = PolicyClient(credential, subscription_id, base_url="https://management.azure.com/")
 
 
-policy_assignment_identity = Identity(type="UserAssigned",user_assigned_identities={f"/subscriptions/{subscription_id}/resourcegroups/{resource_group}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/policy"})
+policy_assignment_identity = Identity(type="UserAssigned",user_assigned_identities={f"/subscriptions/{subscription_id}/resourcegroups/{resource_group}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/policy":{}})
 parameters = {
     "logAnalytics": {
         "value": workspace_id
