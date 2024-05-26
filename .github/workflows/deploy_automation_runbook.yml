@@ -44,7 +44,7 @@ jobs:
         with:
           inlineScript: |       
             pushd ./scripts
-            Import-AzAutomationRunbook -AutomationAccountName ${{ vars.AUTOMATION_ACCONT_NAME }} -Name ${{ vars.RUNBOOK_NAME }} -Path remediation_task_runbook.ps1 -Published -ResourceGroupName 'DefaultResourceGroup-EUS' -Type PowerShell
+            Import-AzAutomationRunbook -AutomationAccountName ${{ vars.AUTOMATION_ACCONT_NAME }} -Name ${{ vars.RUNBOOK_NAME }} -Path remediation_task_runbook.ps1 -Published -ResourceGroupName ${{ vars.RESOURCE_GROUP }} -Type PowerShell
             popd
           azPSVersion: "latest"    
 
@@ -54,7 +54,7 @@ jobs:
         with:
           inlineScript: |
             $params =  @{"identity"="${{ secrets.AUTOMATION_ACCOUNT_IDENTITY }}";"subscription"="${{ vars.SUBSCRIPTION_NAME }}"}
-            New-AzAutomationSchedule -AutomationAccountName ${{ vars.AUTOMATION_ACCONT_NAME }} -Name ${{ vars.SCHEDULE_NAME }} -StartTime "05/26/2024 17:30:00" -HourInterval 1 -TimeZone ${{ vars.TIME_ZONE }} -ResourceGroupName ${{ vars.RESOURCE_GROUP }}
+            New-AzAutomationSchedule -AutomationAccountName ${{ vars.AUTOMATION_ACCONT_NAME }} -Name ${{ vars.SCHEDULE_NAME }} -StartTime ${{ vars.TIME_START_RUNBOOK }} -HourInterval 1 -TimeZone ${{ vars.TIME_ZONE }} -ResourceGroupName ${{ vars.RESOURCE_GROUP }}
             Register-AzAutomationScheduledRunbook -AutomationAccountName ${{ vars.AUTOMATION_ACCONT_NAME }} -Parameters $params -RunbookName ${{ vars.RUNBOOK_NAME }} -ScheduleName ${{ vars.SCHEDULE_NAME }} -ResourceGroupName ${{ vars.RESOURCE_GROUP }}
           azPSVersion: "latest"
 
