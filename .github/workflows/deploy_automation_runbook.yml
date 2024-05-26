@@ -27,15 +27,15 @@ jobs:
           pip install python-dotenv
           
 
-      - name: execute py script # run policy_assignment.py
-        env:
-          SUBSCRIPTION_ID: ${{ vars.SUBSCRIPTION_ID }}
-          WORKSPACE_ID: ${{ vars.WORKSPACE_ID }}
-          RESOURCE_GROUP: ${{ vars.RESOURCE_GROUP }}
-          ASSIGNMENT_LOCATION: ${{ vars.ASSIGNMENT_LOCATION }}
-        run: 
-            python policy_assignments.py
-        working-directory: scripts
+      # - name: execute py script # run policy_assignment.py
+      #   env:
+      #     SUBSCRIPTION_ID: ${{ vars.SUBSCRIPTION_ID }}
+      #     WORKSPACE_ID: ${{ vars.WORKSPACE_ID }}
+      #     RESOURCE_GROUP: ${{ vars.RESOURCE_GROUP }}
+      #     ASSIGNMENT_LOCATION: ${{ vars.ASSIGNMENT_LOCATION }}
+      #   run: 
+      #       python policy_assignments.py
+      #   working-directory: scripts
 
 
       # Deploy runbooks
@@ -54,7 +54,7 @@ jobs:
         with:
           inlineScript: |
             $params =  @{"identity"="${{ secrets.AUTOMATION_ACCOUNT_IDENTITY }}";"subscription"="${{ vars.SUBSCRIPTION_NAME }}"}
-            New-AzAutomationSchedule -AutomationAccountName ${{ vars.AUTOMATION_ACCONT_NAME }} -Name ${{ vars.SCHEDULE_NAME }} -StartTime '05/26/2024 18:30:00' -HourInterval 1 -TimeZone ${{ vars.TIME_ZONE }} -ResourceGroupName ${{ vars.RESOURCE_GROUP }}
+            New-AzAutomationSchedule -AutomationAccountName ${{ vars.AUTOMATION_ACCONT_NAME }} -Name ${{ vars.SCHEDULE_NAME }} -StartTime '${{ vars.DATE_START_RUNBOOK }}${{ vars.TIME_START_RUNBOOK }}' -HourInterval 1 -TimeZone ${{ vars.TIME_ZONE }} -ResourceGroupName ${{ vars.RESOURCE_GROUP }}
             Register-AzAutomationScheduledRunbook -AutomationAccountName ${{ vars.AUTOMATION_ACCONT_NAME }} -Parameters $params -RunbookName ${{ vars.RUNBOOK_NAME }} -ScheduleName ${{ vars.SCHEDULE_NAME }} -ResourceGroupName ${{ vars.RESOURCE_GROUP }}
           azPSVersion: "latest"
 
