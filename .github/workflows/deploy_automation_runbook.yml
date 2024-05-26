@@ -1,4 +1,3 @@
-# This workflow deploys Azure automation runbooks into Azure.
 name: Deploy automation runbooks
 on:
   workflow_dispatch:
@@ -15,20 +14,6 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS2 }}
           enable-AzPSSession: true
-
-      # - name: login to azure
-      #   uses: azure/powershell@v1
-      #   with:
-      #     inlineScript: |
-      #       $identity = "af3790d3-869e-4582-b72a-fe020311d392"
-      #       $AzureContext = (Connect-AzAccount -Identity -AccountId $identity).context
-      #       $connectionResult = Set-AzContext -Subscription $subscription -DefaultProfile $AzureContext
-      #     azPSVersion: "latest"
-
-      # - name: login
-      #   run: |
-      #     az login
-
 
       - name: setup python
         uses: actions/setup-python@v4
@@ -59,7 +44,7 @@ jobs:
         with:
           inlineScript: |       
             pushd ./scripts
-            Import-AzAutomationRunbook -AutomationAccountName 'moon-dev' -Name 'createRemediationTaskRunbookPolicy' -Path remediation_task_runbook.ps1 -Published -ResourceGroupName 'DefaultResourceGroup-EUS' -Type PowerShell
+            Import-AzAutomationRunbook -AutomationAccountName ${{ vars.AUTOMATION_ACCONT_NAME }} -Name ${{ vars.RUNBOOK_NAME }} -Path remediation_task_runbook.ps1 -Published -ResourceGroupName 'DefaultResourceGroup-EUS' -Type PowerShell
             popd
           azPSVersion: "latest"    
 
@@ -68,13 +53,9 @@ jobs:
         uses: azure/powershell@v1
         with:
           inlineScript: |
-            $TimeZone = 'Asia/Jerusalem'
-            $ResourceGroupName = "DefaultResourceGroup-EUS"
-            $ScheduleName = "scheduleToPolicyRunbook"
-            $AutomationAccountName = "moon-dev"
-            $params =  @{"identity"="${{ secrets.AUTOMATION_ACCOUNT_IDENTITY }}";"subscription"="MOON-NM-DIG-DEV"}
-            New-AzAutomationSchedule -AutomationAccountName $AutomationAccountName -Name $ScheduleName -StartTime "05/26/2024 17:30:00" -HourInterval 1 -TimeZone $TimeZone -ResourceGroupName $ResourceGroupName
-            Register-AzAutomationScheduledRunbook -AutomationAccountName $AutomationAccountName -Parameters $params -RunbookName "createRemediationTaskRunbookPolicy" -ScheduleName $ScheduleName -ResourceGroupName $ResourceGroupName
+            $params =  @{"identity"="${{ secrets.AUTOMATION_ACCOUNT_IDENTITY }}";"subscription"="${{ vars.SUBSCRIPTION_NAME }}"}
+            New-AzAutomationSchedule -AutomationAccountName ${{ vars.AUTOMATION_ACCONT_NAME }} -Name ${{ vars.SCHEDULE_NAME }} -StartTime "05/26/2024 17:30:00" -HourInterval 1 -TimeZone ${{ vars.TIME_ZONE }} -ResourceGroupName ${{ vars.RESOURCE_GROUP }}
+            Register-AzAutomationScheduledRunbook -AutomationAccountName ${{ vars.AUTOMATION_ACCONT_NAME }} -Parameters $params -RunbookName ${{ vars.RUNBOOK_NAME }} -ScheduleName ${{ vars.SCHEDULE_NAME }} -ResourceGroupName ${{ vars.RESOURCE_GROUP }}
           azPSVersion: "latest"
 
 
