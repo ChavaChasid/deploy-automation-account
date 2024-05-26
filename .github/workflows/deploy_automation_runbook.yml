@@ -68,7 +68,7 @@ jobs:
             $ScheduleName = "scheduleToPolicyRunbook"
             $AutomationAccountName = "moon-dev"
             $params =  @{"identity"="${{ secrets.AUTOMATION_ACCOUNT_IDENTITY }}";"subscription"="MOON-NM-DIG-DEV"}
-            New-AzAutomationSchedule -AutomationAccountName $AutomationAccountName -Name $ScheduleName -StartTime "05/26/2024 03:10:00" -HourInterval 1 -TimeZone $TimeZone -ResourceGroupName $ResourceGroupName
+            New-AzAutomationSchedule -AutomationAccountName $AutomationAccountName -Name $ScheduleName -StartTime "05/26/2024 16:30:00" -HourInterval 1 -TimeZone $TimeZone -ResourceGroupName $ResourceGroupName
             Register-AzAutomationScheduledRunbook -AutomationAccountName $AutomationAccountName -Parameters $params -RunbookName "createRemediationTaskRunbookPolicy" -ScheduleName $ScheduleName -ResourceGroupName $ResourceGroupName
           azPSVersion: "latest"
 
