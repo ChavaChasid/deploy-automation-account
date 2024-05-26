@@ -43,11 +43,11 @@ jobs:
           
 
       - name: execute py script # run policy_assignment.py
-        env:
-          SOME_SECRET: ${{ vars.SUBSCRIPTION_ID }}
-          SOME_SECRET: ${{ vars.WORKSPACE_ID }}
-          SOME_SECRET: ${{ vars.RESOURCE_GROUP }}
-          SOME_SECRET: ${{ vars.ASSIGNMENT_LOCATION }}
+        # env:
+        #   SOME_SECRET: ${{ vars.SUBSCRIPTION_ID }}
+        #   SOME_SECRET: ${{ vars.WORKSPACE_ID }}
+        #   SOME_SECRET: ${{ vars.RESOURCE_GROUP }}
+        #   SOME_SECRET: ${{ vars.ASSIGNMENT_LOCATION }}
         run: 
             python policy_assignments.py
         working-directory: scripts
