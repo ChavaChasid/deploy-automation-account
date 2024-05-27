@@ -33,15 +33,15 @@ jobs:
           pip install python-dotenv
           
 
-      # - name: execute py script # run policy_assignment.py
-      #   env:
-      #     SUBSCRIPTION_ID: ${{ vars.SUBSCRIPTION_ID }}
-      #     WORKSPACE_ID: ${{ vars.WORKSPACE_ID }}
-      #     RESOURCE_GROUP: ${{ vars.RESOURCE_GROUP }}
-      #     ASSIGNMENT_LOCATION: ${{ vars.ASSIGNMENT_LOCATION }}
-      #   run: 
-      #       python policy_assignments.py
-      #   working-directory: scripts
+      - name: execute py script # run policy_assignment.py
+        env:
+          SUBSCRIPTION_ID: ${{ vars.SUBSCRIPTION_ID }}
+          WORKSPACE_ID: ${{ vars.WORKSPACE_ID }}
+          RESOURCE_GROUP: ${{ vars.RESOURCE_GROUP }}
+          ASSIGNMENT_LOCATION: ${{ vars.ASSIGNMENT_LOCATION }}
+        run: 
+            python policy_assignments.py
+        working-directory: scripts
 
 
       # Deploy runbooks
@@ -55,18 +55,18 @@ jobs:
           azPSVersion: "latest"    
 
       # Create And link runbook to schedule
-      # - name: Create And Link Runbook To Schedule
-      #   uses: azure/powershell@v1
-      #   with:
-      #     inlineScript: |
-      #       $TimeZone = 'Asia/Jerusalem'
-      #       $ResourceGroupName = "DefaultResourceGroup-EUS"
-      #       $ScheduleName = "scheduleToPolicyRunbook"
-      #       $AutomationAccountName = "moon-dev"
-      #       $params =  @{"identity"="${{ secrets.AUTOMATION_ACCOUNT_IDENTITY }}";"subscription"="MOON-NM-DIG-DEV"}
-      #       New-AzAutomationSchedule -AutomationAccountName $AutomationAccountName -Name $ScheduleName -StartTime "05/26/2024 17:30:00" -HourInterval 1 -TimeZone $TimeZone -ResourceGroupName $ResourceGroupName
-      #       Register-AzAutomationScheduledRunbook -AutomationAccountName $AutomationAccountName -Parameters $params -RunbookName "createRemediationTaskRunbookPolicy" -ScheduleName $ScheduleName -ResourceGroupName $ResourceGroupName
-      #     azPSVersion: "latest"
+      - name: Create And Link Runbook To Schedule
+        uses: azure/powershell@v1
+        with:
+          inlineScript: |
+            $TimeZone = 'Asia/Jerusalem'
+            $ResourceGroupName = "DefaultResourceGroup-EUS"
+            $ScheduleName = "scheduleToPolicyRunbook"
+            $AutomationAccountName = "moon-dev"
+            $params =  @{"identity"="${{ secrets.AUTOMATION_ACCOUNT_IDENTITY }}";"subscription"="MOON-NM-DIG-DEV"}
+            New-AzAutomationSchedule -AutomationAccountName $AutomationAccountName -Name $ScheduleName -StartTime "05/26/2024 17:30:00" -HourInterval 1 -TimeZone $TimeZone -ResourceGroupName $ResourceGroupName
+            Register-AzAutomationScheduledRunbook -AutomationAccountName $AutomationAccountName -Parameters $params -RunbookName "createRemediationTaskRunbookPolicy" -ScheduleName $ScheduleName -ResourceGroupName $ResourceGroupName
+          azPSVersion: "latest"
 
 
       # Logout
