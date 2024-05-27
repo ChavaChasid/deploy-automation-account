@@ -15,11 +15,20 @@ jobs:
       #   with:
       #     creds: ${{ secrets.AZURE_CREDENTIALS2 }}
       #     enable-AzPSSession: true
-    
+
+      # - name: login to azure
+      #   uses: azure/powershell@v1
+      #   with:
+      #     inlineScript: |
+      #       $identity = "af3790d3-869e-4582-b72a-fe020311d392"
+      #       $AzureContext = (Connect-AzAccount -Identity -AccountId $identity).context
+      #       $connectionResult = Set-AzContext -Subscription $subscription -DefaultProfile $AzureContext
+      #     azPSVersion: "latest"
 
       - name: login
         run: |
-          az login
+          az login 
+
 
       - name: setup python
         uses: actions/setup-python@v4
@@ -34,11 +43,6 @@ jobs:
           
 
       - name: execute py script # run policy_assignment.py
-        # env:
-        #   SUBSCRIPTION_ID: ${{ vars.SUBSCRIPTION_ID }}
-        #   WORKSPACE_ID: ${{ vars.WORKSPACE_ID }}
-        #   RESOURCE_GROUP: ${{ vars.RESOURCE_GROUP }}
-        #   ASSIGNMENT_LOCATION: ${{ vars.ASSIGNMENT_LOCATION }}
         run: 
             python policy_assignments.py
         working-directory: scripts
@@ -64,7 +68,7 @@ jobs:
             $ScheduleName = "scheduleToPolicyRunbook"
             $AutomationAccountName = "moon-dev"
             $params =  @{"identity"="${{ secrets.AUTOMATION_ACCOUNT_IDENTITY }}";"subscription"="MOON-NM-DIG-DEV"}
-            New-AzAutomationSchedule -AutomationAccountName $AutomationAccountName -Name $ScheduleName -StartTime "05/26/2024 17:30:00" -HourInterval 1 -TimeZone $TimeZone -ResourceGroupName $ResourceGroupName
+            New-AzAutomationSchedule -AutomationAccountName $AutomationAccountName -Name $ScheduleName -StartTime "05/19/2024 10:45:00" -HourInterval 1 -TimeZone $TimeZone -ResourceGroupName $ResourceGroupName
             Register-AzAutomationScheduledRunbook -AutomationAccountName $AutomationAccountName -Parameters $params -RunbookName "createRemediationTaskRunbookPolicy" -ScheduleName $ScheduleName -ResourceGroupName $ResourceGroupName
           azPSVersion: "latest"
 
