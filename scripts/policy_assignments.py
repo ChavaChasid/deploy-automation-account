@@ -7,10 +7,16 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-subscription_id = os.environ["SUBSCRIPTION_ID"]
-workspace_id = os.environ["WORKSPACE_ID"]
-resource_group = os.environ["RESOURCE_GROUP"]
-assignment_location = os.environ["ASSIGNMENT_LOCATION"]
+
+# subscription_id = os.environ["SUBSCRIPTION_ID"]
+# workspace_id = os.environ["WORKSPACE_ID"]
+# resource_group = os.environ["RESOURCE_GROUP"]
+# assignment_location = os.environ["ASSIGNMENT_LOCATION"]
+
+subscription_id = 'a273b4fb-6a3d-4804-a047-5d293da8811d'
+workspace_id = '/subscriptions/a273b4fb-6a3d-4804-a047-5d293da8811d/resourcegroups/defaultresourcegroup-eus/providers/microsoft.operationalinsights/workspaces/defaultworkspace-a273b4fb-6a3d-4804-a047-5d293da8811d-eus'
+resource_group = 'DefaultResourceGroup-EUS'
+assignment_location = 'East US'
 
 credential = AzureCliCredential()
 policyClient = PolicyClient(credential, subscription_id, base_url="https://management.azure.com/")
