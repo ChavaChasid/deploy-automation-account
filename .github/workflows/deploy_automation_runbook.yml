@@ -1,3 +1,4 @@
+# This workflow deploys Azure automation runbooks into Azure.
 name: Deploy automation runbooks
 on:
   workflow_dispatch:
@@ -44,19 +45,23 @@ jobs:
         with:
           inlineScript: |       
             pushd ./scripts
-            Import-AzAutomationRunbook -AutomationAccountName ${{ vars.AUTOMATION_ACCONT_NAME }} -Name ${{ vars.RUNBOOK_NAME }} -Path remediation_task_runbook.ps1 -Published -ResourceGroupName ${{ vars.RESOURCE_GROUP }} -Type PowerShell
+            Import-AzAutomationRunbook -AutomationAccountName 'moon-dev' -Name 'createRemediationTaskRunbookPolicy' -Path remediation_task_runbook.ps1 -Published -ResourceGroupName 'DefaultResourceGroup-EUS' -Type PowerShell
             popd
           azPSVersion: "latest"    
 
       # Create And link runbook to schedule
-      - name: Create And Link Runbook To Schedule
-        uses: azure/powershell@v1
-        with:
-          inlineScript: |
-            $params =  @{"identity"="${{ secrets.AUTOMATION_ACCOUNT_IDENTITY }}";"subscription"="${{ vars.SUBSCRIPTION_NAME }}"}
-            New-AzAutomationSchedule -AutomationAccountName ${{ vars.AUTOMATION_ACCONT_NAME }} -Name ${{ vars.SCHEDULE_NAME }} -StartTime '${{ vars.DATE_START_RUNBOOK }} ${{ vars.TIME_START_RUNBOOK }}' -HourInterval 1 -TimeZone ${{ vars.TIME_ZONE }} -ResourceGroupName ${{ vars.RESOURCE_GROUP }}
-            Register-AzAutomationScheduledRunbook -AutomationAccountName ${{ vars.AUTOMATION_ACCONT_NAME }} -Parameters $params -RunbookName ${{ vars.RUNBOOK_NAME }} -ScheduleName ${{ vars.SCHEDULE_NAME }} -ResourceGroupName ${{ vars.RESOURCE_GROUP }}
-          azPSVersion: "latest"
+      # - name: Create And Link Runbook To Schedule
+      #   uses: azure/powershell@v1
+      #   with:
+      #     inlineScript: |
+      #       $TimeZone = 'Asia/Jerusalem'
+      #       $ResourceGroupName = "DefaultResourceGroup-EUS"
+      #       $ScheduleName = "scheduleToPolicyRunbook"
+      #       $AutomationAccountName = "moon-dev"
+      #       $params =  @{"identity"="${{ secrets.AUTOMATION_ACCOUNT_IDENTITY }}";"subscription"="MOON-NM-DIG-DEV"}
+      #       New-AzAutomationSchedule -AutomationAccountName $AutomationAccountName -Name $ScheduleName -StartTime "05/26/2024 17:30:00" -HourInterval 1 -TimeZone $TimeZone -ResourceGroupName $ResourceGroupName
+      #       Register-AzAutomationScheduledRunbook -AutomationAccountName $AutomationAccountName -Parameters $params -RunbookName "createRemediationTaskRunbookPolicy" -ScheduleName $ScheduleName -ResourceGroupName $ResourceGroupName
+      #     azPSVersion: "latest"
 
 
       # Logout
