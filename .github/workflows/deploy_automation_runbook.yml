@@ -28,6 +28,7 @@ jobs:
       - name: login
         run: |
           az login 
+        enable-AzPSSession: true
 
 
       - name: setup python
