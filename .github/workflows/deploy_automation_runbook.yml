@@ -44,7 +44,7 @@ jobs:
         with:
           inlineScript: |       
             pushd ./scripts
-            Import-AzAutomationRunbook -AutomationAccountName 'moon-dev' -Name 'createRemediationTaskRunbookPolicy' -Path remediation_task_runbook.ps1 -Published -ResourceGroupName 'DefaultResourceGroup-EUS' -Type PowerShell
+            Import-AzAutomationRunbook -AutomationAccountName 'moon-dev' -Name 'createRemediationTaskRunbookPolicyTry' -Path remediation_task_runbook.ps1 -Published -ResourceGroupName 'DefaultResourceGroup-EUS' -Type PowerShell
             popd
           azPSVersion: "latest"    
 
