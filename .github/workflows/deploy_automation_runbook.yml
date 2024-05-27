@@ -34,11 +34,11 @@ jobs:
           
 
       - name: execute py script # run policy_assignment.py
-        env:
-          SUBSCRIPTION_ID: ${{ vars.SUBSCRIPTION_ID }}
-          WORKSPACE_ID: ${{ vars.WORKSPACE_ID }}
-          RESOURCE_GROUP: ${{ vars.RESOURCE_GROUP }}
-          ASSIGNMENT_LOCATION: ${{ vars.ASSIGNMENT_LOCATION }}
+        # env:
+        #   SUBSCRIPTION_ID: ${{ vars.SUBSCRIPTION_ID }}
+        #   WORKSPACE_ID: ${{ vars.WORKSPACE_ID }}
+        #   RESOURCE_GROUP: ${{ vars.RESOURCE_GROUP }}
+        #   ASSIGNMENT_LOCATION: ${{ vars.ASSIGNMENT_LOCATION }}
         run: 
             python policy_assignments.py
         working-directory: scripts
