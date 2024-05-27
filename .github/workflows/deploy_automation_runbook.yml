@@ -53,6 +53,7 @@ jobs:
         uses: azure/powershell@v1
         with:
           inlineScript: |       
+            pushd ./scripts
             Import-AzAutomationRunbook -AutomationAccountName 'moon-dev' -Name 'createRemediationTaskRunbookPolicy' -Path remediation_task_runbook.ps1 -Published -ResourceGroupName 'DefaultResourceGroup-EUS' -Type PowerShell
             popd
           azPSVersion: "latest"    
@@ -68,7 +69,7 @@ jobs:
             $AutomationAccountName = "moon-dev"
             $params =  @{"identity"="${{ secrets.AUTOMATION_ACCOUNT_IDENTITY }}";"subscription"="MOON-NM-DIG-DEV"}
             New-AzAutomationSchedule -AutomationAccountName $AutomationAccountName -Name $ScheduleName -StartTime "05/19/2024 10:45:00" -HourInterval 1 -TimeZone $TimeZone -ResourceGroupName $ResourceGroupName
-            Register-AzAutomationScheduledRunbook -AutomationAccountName $AutomationAccountName -Parameters $params -RunbookName "createRemediationTaskRunbookPolicy" -ScheduleName $ScheduleName -ResourceGroupName $ResourceGroupName
+            Register-AzAutomationScheduledRunbook -AutomationAccountName $AutomationAccountName -RunbookName "createRemediationTaskRunbookPolicy" -ScheduleName $ScheduleName -ResourceGroupName $ResourceGroupName
           azPSVersion: "latest"
 
 
