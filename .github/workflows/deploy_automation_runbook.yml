@@ -1,6 +1,6 @@
 name: Deploy automation runbooks
 on:
-  workflow_dispatch:
+  push:
 permissions:
   contents: read
   id-token: write
