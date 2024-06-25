@@ -1,10 +1,10 @@
 Param
 (
-  [Parameter (Mandatory= $true)]
-  [string] $identity,
+#   [Parameter (Mandatory= $true)]
+#   [string] $identity,
 
-  [Parameter (Mandatory= $true)]
-  [string] $subscription,
+#   [Parameter (Mandatory= $true)]
+#   [string] $subscription,
 
   [Parameter (Mandatory= $true)]
   [string] $managementGroup
@@ -20,7 +20,7 @@ Connect-AzAccount -Identity
 $policyAssignmentIdArray="tablepolicy","blobpolicy","filepolicy","queuepolicy"
 
 for ($var = 0; $var -le 4; $var++) {
-    $policyAssignmentId="/providers/microsoft.management/managementgroups/moon-test/providers/microsoft.authorization/policyassignments/"+$policyAssignmentIdArray[$var]
+    $policyAssignmentId="/providers/microsoft.management/managementgroups/"+$managementGroup+"/providers/microsoft.authorization/policyassignments/"+$policyAssignmentIdArray[$var]
     try {
         $name = "remediation"+$var
         Start-AzPolicyRemediation -ManagementGroupName $managementGroup -PolicyAssignmentId $policyAssignmentId -Name $name 
