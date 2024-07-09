@@ -13,16 +13,16 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS_MG }}
           enable-AzPSSession: true
 
-      # - name: setup python
-      #   uses: actions/setup-python@v4
-      #   with:
-      #     python-version: '3.11' # install the python version needed
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11' # install the python version needed
 
-      # - name: install python packages
-      #   run: |
-      #     pip install azure-cli
-      #     pip install azure.identity
-      #     pip install python-dotenv
+      - name: install python packages
+        run: |
+          pip install azure-cli
+          pip install azure.identity
+          pip install python-dotenv
           
 
       # - name: execute py script # run policy_assignment.py
