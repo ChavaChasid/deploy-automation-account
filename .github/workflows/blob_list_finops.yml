@@ -53,7 +53,7 @@ jobs:
         uses: azure/powershell@v1
         with:
           inlineScript: |
-            az role assignment create --assignee "af3790d3-869e-4582-b72a-fe020311d392" --role "Reader and Data Access" --scope "managementGroups/moon-test"
+            az role assignment create --assignee "af3790d3-869e-4582-b72a-fe020311d392" --role "Reader and Data Access" --scope "subscriptions/a273b4fb-6a3d-4804-a047-5d293da8811d"
           azPSVersion: "latest"
 
 
