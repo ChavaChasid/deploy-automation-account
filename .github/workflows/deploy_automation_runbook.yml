@@ -1,65 +1,66 @@
-# name: Deploy automation runbooks
-# on: [push]
-# permissions:
-#   contents: read
-#   id-token: write
-# jobs:
-#   build-and-deploy:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v3
-#       - uses: azure/login@v2
-#         with:
-#           creds: ${{ secrets.AZURE_CREDENTIALS_MG }}
-#           enable-AzPSSession: true
+name: Deploy automation runbooks
+on: [push]
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS_MG }}
+          enable-AzPSSession: true
 
-#       - name: setup python
-#         uses: actions/setup-python@v4
-#         with:
-#           python-version: '3.11' # install the python version needed
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11' # install the python version needed
 
-#       - name: install python packages
-#         run: |
-#           pip install azure-cli
-#           pip install azure.identity
-#           pip install python-dotenv
+      - name: install python packages
+        run: |
+          pip install azure-cli
+          pip install azure.identity
+          pip install python-dotenv
           
 
-#       # - name: execute py script # run policy_assignment.py
-#       #   env:
-#       #     SUBSCRIPTION_ID: ${{ vars.SUBSCRIPTION_ID }}
-#       #     WORKSPACE_ID: ${{ vars.WORKSPACE_ID }}
-#       #     RESOURCE_GROUP: ${{ vars.RESOURCE_GROUP }}
-#       #     ASSIGNMENT_LOCATION: ${{ vars.ASSIGNMENT_LOCATION }}
-#       #     MANAGEMENT_GROUP: ${{ vars.MANAGEMENT_GROUP }}
-#       #   run: 
-#       #       python policy_assignments_mg.py
-#       #   working-directory: scripts_mg
+      - name: execute py script # run policy_assignment.py
+        env:
+          SUBSCRIPTION_ID: ${{ vars.SUBSCRIPTION_ID_NEW }}
+          WORKSPACE_ID: ${{ vars.WORKSPACE_ID_NEW }}
+          RESOURCE_GROUP: ${{ vars.RESOURCE_GROUP_NEW }}
+          ASSIGNMENT_LOCATION: ${{ vars.ASSIGNMENT_LOCATION_NEW }}
+          MANAGEMENT_GROUP: ${{ vars.MANAGEMENT_GROUP_NEW }}
+          MANAGED_IDENTITY_NAME: ${{ vars.MANAGED_IDENTITY_NAME_NEW }}
+        run: 
+            python policy_assignments_mg.py
+        working-directory: scripts_mg
 
 
-#       # # Deploy runbooks
-#       # - name: Deploy Azure runbooks
-#       #   uses: azure/powershell@v1
-#       #   with:
-#       #     inlineScript: |       
-#       #       pushd ./scripts_mg
-#       #       Import-AzAutomationRunbook -AutomationAccountName ${{ vars.AUTOMATION_ACCOUNT_NAME }} -Name ${{ vars.RUNBOOK_NAME }} -Path remediation_task_runbook_mg.ps1 -Published -ResourceGroupName ${{ vars.RESOURCE_GROUP }} -Type PowerShell
-#       #       popd
-#       #     azPSVersion: "latest"    
+      # Deploy runbooks
+      - name: Deploy Azure runbooks
+        uses: azure/powershell@v1
+        with:
+          inlineScript: |       
+            pushd ./scripts_mg
+            Import-AzAutomationRunbook -AutomationAccountName ${{ vars.AUTOMATION_ACCOUNT_NAME_NEW }} -Name ${{ vars.RUNBOOK_NAME_NEW }} -Path remediation_task_runbook_mg.ps1 -Published -ResourceGroupName ${{ vars.RESOURCE_GROUP_NEW }} -Type PowerShell
+            popd
+          azPSVersion: "latest"    
 
 
-#       # Create And link runbook to schedule
-#       - name: Create And Link Runbook To Schedule
-#         uses: azure/powershell@v1
-#         with:
-#           inlineScript: |
-#             $params =  @{"managementGroup"="${{ vars.MANAGEMENT_GROUP }}"}
-#             New-AzAutomationSchedule -AutomationAccountName ${{ vars.AUTOMATION_ACCOUNT_NAME }} -Name ${{ vars.SCHEDULE_NAME }} -StartTime '${{ vars.DATE_START_RUNBOOK }} ${{ vars.TIME_START_RUNBOOK }}' -HourInterval 1 -TimeZone ${{ vars.TIME_ZONE }} -ResourceGroupName ${{ vars.RESOURCE_GROUP }}
-#             Register-AzAutomationScheduledRunbook -AutomationAccountName ${{ vars.AUTOMATION_ACCOUNT_NAME }} -Parameters $params -RunbookName ${{ vars.RUNBOOK_NAME }} -ScheduleName ${{ vars.SCHEDULE_NAME }} -ResourceGroupName ${{ vars.RESOURCE_GROUP }}
-#           azPSVersion: "latest"
+      # Create And link runbook to schedule
+      - name: Create And Link Runbook To Schedule
+        uses: azure/powershell@v1
+        with:
+          inlineScript: |
+            $params =  @{"managementGroup"="${{ vars.MANAGEMENT_GROUP_NEW }}"}
+            New-AzAutomationSchedule -AutomationAccountName ${{ vars.AUTOMATION_ACCOUNT_NAME_NEW }} -Name ${{ vars.SCHEDULE_NAME_NEW }} -StartTime '${{ vars.DATE_START_RUNBOOK }} ${{ vars.TIME_START_RUNBOOK }}' -HourInterval 1 -TimeZone ${{ vars.TIME_ZONE }} -ResourceGroupName ${{ vars.RESOURCE_GROUP_NEW }}
+            Register-AzAutomationScheduledRunbook -AutomationAccountName ${{ vars.AUTOMATION_ACCOUNT_NAME_NEW }} -Parameters $params -RunbookName ${{ vars.RUNBOOK_NAME_NEW }} -ScheduleName ${{ vars.SCHEDULE_NAME_NEW }} -ResourceGroupName ${{ vars.RESOURCE_GROUP_NEW }}
+          azPSVersion: "latest"
 
 
-#       # Logout
-#       - name: logout
-#         run: |
-#           az logout
+      # Logout
+      - name: logout
+        run: |
+          az logout

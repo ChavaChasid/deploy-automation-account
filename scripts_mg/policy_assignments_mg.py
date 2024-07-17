@@ -14,6 +14,7 @@ workspace_id = os.getenv("WORKSPACE_ID")
 resource_group = os.getenv("RESOURCE_GROUP")
 assignment_location = os.getenv("ASSIGNMENT_LOCATION")
 management_group = os.getenv("MANAGEMENT_GROUP")
+managed_identity_name = os.getenv("MANAGED_IDENTITY_NAME")
 # subscription_id = 'a273b4fb-6a3d-4804-a047-5d293da8811d'
 # workspace_id = '/subscriptions/a273b4fb-6a3d-4804-a047-5d293da8811d/resourcegroups/defaultresourcegroup-eus/providers/microsoft.operationalinsights/workspaces/defaultworkspace-a273b4fb-6a3d-4804-a047-5d293da8811d-eus'
 # workspace_id2 = '/subscriptions/a273b4fb-6a3d-4804-a047-5d293da8811d/resourcegroups/rg-dev/providers/microsoft.operationalinsights/workspaces/la-storage-read'
@@ -24,7 +25,7 @@ management_group = os.getenv("MANAGEMENT_GROUP")
 credential = DefaultAzureCredential()
 policyClient = PolicyClient(credential, subscription_id, base_url="https://management.azure.com/")
 
-policy_assignment_identity = Identity(type="UserAssigned",user_assigned_identities={f"/subscriptions/{subscription_id}/resourcegroups/{resource_group}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/policy":{}})
+policy_assignment_identity = Identity(type="UserAssigned",user_assigned_identities={f"/subscriptions/{subscription_id}/resourcegroups/{resource_group}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{managed_identity_name}":{}})
 parameters = {
     "logAnalytics": {
         "value": workspace_id
