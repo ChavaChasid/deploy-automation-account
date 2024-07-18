@@ -13,6 +13,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS_MG }}
           enable-AzPSSession: true
 
+
       - name: setup python
         uses: actions/setup-python@v4
         with:
