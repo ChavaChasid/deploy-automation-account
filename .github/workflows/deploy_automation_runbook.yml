@@ -44,7 +44,7 @@ jobs:
         with:
           inlineScript: |       
             pushd ./scripts_mg
-            Import-AzAutomationRunbook -AutomationAccountName ${{ vars.AUTOMATION_ACCOUNT_NAME_NEW }} -Name ${{ vars.RUNBOOK_NAME_NEW }} -Path remediation_task_runbook_mg.ps1 -Published -ResourceGroupName ${{ vars.RESOURCE_GROUP_NEW }} -Type PowerShell
+            Import-AzAutomationRunbook -AutomationAccountName ${{ vars.AUTOMATION_ACCOUNT_NAME }} -Name ${{ vars.RUNBOOK_NAME_NEW }} -Path remediation_task_runbook_mg.ps1 -Published -ResourceGroupName ${{ vars.RESOURCE_GROUP }} -Type PowerShell
             popd
           azPSVersion: "latest"    
 
