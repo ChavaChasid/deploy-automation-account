@@ -49,15 +49,15 @@ jobs:
           azPSVersion: "latest"    
 
 
-      # # Create And link runbook to schedule
-      # - name: Create And Link Runbook To Schedule
-      #   uses: azure/powershell@v1
-      #   with:
-      #     inlineScript: |
-      #       $params =  @{"managementGroup"="${{ vars.MANAGEMENT_GROUP_NEW }}"}
-      #       New-AzAutomationSchedule -AutomationAccountName ${{ vars.AUTOMATION_ACCOUNT_NAME_NEW }} -Name ${{ vars.SCHEDULE_NAME_NEW }} -StartTime '${{ vars.DATE_START_RUNBOOK }} ${{ vars.TIME_START_RUNBOOK }}' -HourInterval 1 -TimeZone ${{ vars.TIME_ZONE }} -ResourceGroupName ${{ vars.RESOURCE_GROUP_NEW }}
-      #       Register-AzAutomationScheduledRunbook -AutomationAccountName ${{ vars.AUTOMATION_ACCOUNT_NAME_NEW }} -Parameters $params -RunbookName ${{ vars.RUNBOOK_NAME_NEW }} -ScheduleName ${{ vars.SCHEDULE_NAME_NEW }} -ResourceGroupName ${{ vars.RESOURCE_GROUP_NEW }}
-      #     azPSVersion: "latest"
+      # Create And link runbook to schedule
+      - name: Create And Link Runbook To Schedule
+        uses: azure/powershell@v1
+        with:
+          inlineScript: |
+            $params =  @{"managementGroup"="${{ vars.MANAGEMENT_GROUP_NEW }}"}
+            New-AzAutomationSchedule -AutomationAccountName ${{ vars.AUTOMATION_ACCOUNT_NAME_NEW }} -Name ${{ vars.SCHEDULE_NAME_NEW }} -StartTime '${{ vars.DATE_START_RUNBOOK }} ${{ vars.TIME_START_RUNBOOK }}' -HourInterval 1 -TimeZone ${{ vars.TIME_ZONE }} -ResourceGroupName ${{ vars.RESOURCE_GROUP_NEW }}
+            Register-AzAutomationScheduledRunbook -AutomationAccountName ${{ vars.AUTOMATION_ACCOUNT_NAME_NEW }} -Parameters $params -RunbookName ${{ vars.RUNBOOK_NAME_NEW }} -ScheduleName ${{ vars.SCHEDULE_NAME_NEW }} -ResourceGroupName ${{ vars.RESOURCE_GROUP_NEW }}
+          azPSVersion: "latest"
 
 
       # Logout
