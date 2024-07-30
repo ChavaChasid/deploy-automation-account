@@ -59,7 +59,6 @@ jobs:
             Register-AzAutomationScheduledRunbook -AutomationAccountName ${{ vars.AUTOMATION_ACCOUNT_NAME_NEW }} -Parameters $params -RunbookName ${{ vars.RUNBOOK_NAME_NEW }} -ScheduleName ${{ vars.SCHEDULE_NAME_NEW }} -ResourceGroupName ${{ vars.RESOURCE_GROUP_NEW }}
           azPSVersion: "latest"
 
-
       # Logout
       - name: logout
         run: |
