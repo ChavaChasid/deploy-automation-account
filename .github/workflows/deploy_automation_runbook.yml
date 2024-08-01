@@ -18,24 +18,24 @@ jobs:
         with:
           python-version: '3.11' # install the python version needed
 
-      # - name: install python packages
-      #   run: |
-      #     pip install azure-cli
-      #     pip install azure.identity
-      #     pip install python-dotenv
+      - name: install python packages
+        run: |
+          pip install azure-cli
+          pip install azure.identity
+          pip install python-dotenv
           
 
-      # - name: execute py script # run policy_assignment.py
-      #   env:
-      #     SUBSCRIPTION_ID: ${{ vars.SUBSCRIPTION_ID_NEW }}
-      #     WORKSPACE_ID: ${{ vars.WORKSPACE_ID_NEW }}
-      #     RESOURCE_GROUP: ${{ vars.RESOURCE_GROUP_NEW }}
-      #     ASSIGNMENT_LOCATION: ${{ vars.ASSIGNMENT_LOCATION_NEW }}
-      #     MANAGEMENT_GROUP: ${{ vars.MANAGEMENT_GROUP_NEW }}
-      #     MANAGED_IDENTITY_NAME: ${{ vars.MANAGED_IDENTITY_NAME_NEW }}
-      #   run: 
-      #       python policy_assignments_mg.py
-      #   working-directory: scripts_mg
+      - name: execute py script # run policy_assignment.py
+        env:
+          SUBSCRIPTION_ID: ${{ vars.SUBSCRIPTION_ID_NEW }}
+          WORKSPACE_ID: ${{ vars.WORKSPACE_ID_NEW }}
+          RESOURCE_GROUP: ${{ vars.RESOURCE_GROUP_NEW }}
+          ASSIGNMENT_LOCATION: ${{ vars.ASSIGNMENT_LOCATION_NEW }}
+          MANAGEMENT_GROUP: ${{ vars.MANAGEMENT_GROUP_NEW }}
+          MANAGED_IDENTITY_NAME: ${{ vars.MANAGED_IDENTITY_NAME_NEW }}
+        run: 
+            python policy_assignments_mg.py
+        working-directory: scripts_mg
 
 
       # Deploy runbooks
