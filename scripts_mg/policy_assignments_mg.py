@@ -35,7 +35,7 @@ parameters = {
     # }
 }
 
-assignments_name=["queuepolicyprod","tablepolicyprod","blobpolicyprod","filepolicyprod"]
+assignments_name=["la-queue-prod","la-table-prod","la-blob-prod","la-file-prod"]
 definitions_id=["7bd000e3-37c7-4928-9f31-86c4b77c5c45","2fb86bf3-d221-43d1-96d1-2434af34eaa0","b4fe1a3b-0715-4c6c-a5ea-ffc33cf823cb","25a70cc8-2bd4-47f1-90b6-1478e4662c96"]
 for i in range(0,4):
     policy_assignment_details = PolicyAssignment(display_name=assignments_name[i],

@@ -17,7 +17,7 @@ Param
 
 Connect-AzAccount -Identity
 
-$policyAssignmentIdArray="tablepolicyprod","blobpolicyprod","filepolicyprod","queuepolicyprod"
+$policyAssignmentIdArray="la-queue-prod","la-table-prod","la-blob-prod","la-file-prod"
 
 for ($var = 0; $var -le 4; $var++) {
     $policyAssignmentId="/providers/microsoft.management/managementgroups/"+$managementGroup+"/providers/microsoft.authorization/policyassignments/"+$policyAssignmentIdArray[$var]
