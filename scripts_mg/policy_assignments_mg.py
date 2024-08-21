@@ -2,7 +2,6 @@
 from azure.mgmt.resource.policy import PolicyClient
 from azure.mgmt.resource.policy.models import PolicyAssignment, Identity
 from azure.identity import AzureCliCredential, DefaultAzureCredential   
-# from azure.mgmt.managementgroups import ManagementGroupsClient
 
 import os
 from dotenv import load_dotenv
@@ -15,12 +14,6 @@ resource_group = os.getenv("RESOURCE_GROUP")
 assignment_location = os.getenv("ASSIGNMENT_LOCATION")
 management_group = os.getenv("MANAGEMENT_GROUP")
 managed_identity_name = os.getenv("MANAGED_IDENTITY_NAME")
-# subscription_id = 'a273b4fb-6a3d-4804-a047-5d293da8811d'
-# workspace_id = '/subscriptions/a273b4fb-6a3d-4804-a047-5d293da8811d/resourcegroups/defaultresourcegroup-eus/providers/microsoft.operationalinsights/workspaces/defaultworkspace-a273b4fb-6a3d-4804-a047-5d293da8811d-eus'
-# workspace_id2 = '/subscriptions/a273b4fb-6a3d-4804-a047-5d293da8811d/resourcegroups/rg-dev/providers/microsoft.operationalinsights/workspaces/la-storage-read'
-# resource_group = 'DefaultResourceGroup-EUS'
-# assignment_location = 'East US'
-# management_group = 'moon-test'
 
 credential = DefaultAzureCredential()
 policyClient = PolicyClient(credential, subscription_id, base_url="https://management.azure.com/")
@@ -30,9 +23,6 @@ parameters = {
     "logAnalytics": {
         "value": workspace_id
     }
-    # "profileName":{
-    #     "value":"la-storage-read"
-    # }
 }
 
 assignments_name=["policy-la-queue","policy-la-table","policy-la-blob","policy-la-file"]
@@ -48,5 +38,4 @@ for i in range(0,4):
     policy_assignment = policyClient.policy_assignments.create(f"/providers/Microsoft.Management/managementGroups/{management_group}",
                                                               assignments_name[i],
                                                               policy_assignment_details)
-    print(policy_assignment)
-
+    
