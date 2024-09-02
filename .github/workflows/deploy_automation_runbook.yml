@@ -37,7 +37,6 @@ jobs:
             python policy_definitions_mg.py
         working-directory: scripts_mg
 
-
       # Deploy runbooks
       - name: Deploy Azure runbooks
         uses: azure/powershell@v1
@@ -47,7 +46,6 @@ jobs:
             Import-AzAutomationRunbook -AutomationAccountName ${{ vars.AUTOMATION_ACCOUNT_NAME }} -Name ${{ vars.RUNBOOK_NAME }} -Path remediation_task_runbook_mg.ps1 -Published -ResourceGroupName ${{ vars.RESOURCE_GROUP }} -Type PowerShell
             popd
           azPSVersion: "latest"    
-
 
       # Create And link runbook to schedule
       - name: Create And Link Runbook To Schedule

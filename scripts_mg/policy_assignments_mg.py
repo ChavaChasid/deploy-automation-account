@@ -39,3 +39,4 @@ for i in range(0,4):
                                                               assignments_name[i],
                                                               policy_assignment_details)
     
+    
